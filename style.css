@@ -945,9 +945,15 @@ footer {
 /* Responsive Design */
 @media screen and (max-width: 992px) {
     .hero {
-        flex-direction: column;
+        flex-direction: column-reverse;
+        /* Put image on top of text on mobile/tablet */
         text-align: center;
         padding-top: 10rem;
+        gap: 3rem;
+    }
+
+    .hero-content {
+        padding: 0 5%;
     }
 
     .hero-cta {
@@ -967,6 +973,12 @@ footer {
         border-right: none;
         border-bottom: 1px solid var(--glass-border);
     }
+
+    .projects-container {
+        grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+        /* Single column on medium/small */
+        gap: 2rem;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -978,18 +990,41 @@ footer {
         display: block;
     }
 
+    .section-title {
+        align-self: center;
+        text-align: center;
+        margin-bottom: 2.5rem;
+    }
+
+    .title-underline {
+        margin: 0.5rem auto 0;
+    }
+
+    .title-underline::after {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30px;
+    }
+
+    .stats {
+        justify-content: center;
+        text-align: center;
+    }
+
     .nav-links {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 70%;
+        width: 75%;
         height: 100vh;
-        background: var(--glass-bg);
+        background: var(--clr-bg-dark);
+        background: linear-gradient(180deg, var(--clr-bg-dark) 0%, var(--clr-bg-lighter) 100%);
         backdrop-filter: blur(20px);
         flex-direction: column;
         justify-content: center;
         align-items: center;
         transition: right 0.4s ease;
+        z-index: 99;
     }
 
     .nav-links.active {
@@ -1010,36 +1045,116 @@ footer {
     }
 
     .greeting {
-        font-size: 3.5rem;
-        /* Fixed from 10.5rem typo */
+        font-size: clamp(2.2rem, 10vw, 3rem);
+        line-height: 1.1;
+        margin-bottom: 1rem;
     }
 
     .role {
-        font-size: 2rem;
-        /* Fixed from 5.5rem typo */
+        font-size: clamp(1.2rem, 5vw, 1.8rem);
+        margin-bottom: 1.5rem;
     }
 
     .section-title h2 {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
 
     .stat-num {
-        font-size: 2rem;
+        font-size: 2.2rem;
+    }
+
+    .workshop-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .workshop-visual {
+        flex: 1;
+        height: 200px;
+    }
+
+    .workshop-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .workshop-item:hover {
+        transform: translateY(-10px);
     }
 }
 
 @media screen and (max-width: 480px) {
-    .profile-img-placeholder {
-        width: 200px;
-        height: 200px;
+    .hero {
+        padding-top: 8rem;
+        gap: 2rem;
+    }
+
+    .hero-image-wrapper {
+        width: 240px;
+        height: 240px;
+    }
+
+    /* Reposition badges for smaller circular frame to prevent profile overlap */
+    .badge-1 {
+        top: 15%;
+        right: -5%;
+    }
+
+    .badge-2 {
+        bottom: 20%;
+        left: -5%;
+    }
+
+    .badge-3 {
+        bottom: 5%;
+        right: 5%;
     }
 
     .floating-badge {
-        font-size: 0.7rem;
-        padding: 0.3rem 0.6rem;
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+        background: rgba(26, 5, 17, 0.8);
     }
 
     .btn {
-        padding: 0.6rem 1.2rem;
+        width: 100%;
+        padding: 0.85rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+    }
+
+    .hero-desc {
+        font-size: 1.05rem;
+        line-height: 1.5;
+        margin-bottom: 2.5rem;
+        text-wrap: balance;
+    }
+
+    .greeting {
+        font-size: 2rem;
+        /* Adjusted to prevent name overflow */
+        margin-bottom: 1rem;
+    }
+
+    .role {
+        font-size: 1.2rem;
+        /* Prevents "Cybersecurity" from cutting off width-wise */
+        font-weight: 700;
+    }
+
+    #typewriter {
+        font-size: 1.2rem;
+    }
+
+    .highlight {
+        display: block;
+        /* Moves Jemieryn Arzaga to its own line for better mobile wrapping */
+        padding-top: 0.2rem;
     }
 }
